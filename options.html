@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Options | CopyAllURLs</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Copy All URLs for Google Chrome - preferences panel">
+<meta name="author" content="Vincent Paré - www.finalclap.com">
+
+<link href="vendor/twitter-bootstrap/css/bootstrap.css" rel="stylesheet">
+<style type="text/css">
+body{background:#F0F0F0;}
+.hero-unit{background-color:#E9E9E9;}
+
+/*
+@media (min-width: 1200px){
+	.container, .navbar-fixed-top .container, .navbar-fixed-bottom .container{
+		width: 940px;
+	}
+}
+*/
+.container{width:700px;}
+.well{background-color:#DFDFDF;}
+.well .well{background-color:#e5e5e5; margin:0;}
+.storytitle{padding-left:2px; margin-top:40px;}
+.storytitle.first{font-size:26px; margin-bottom:5px; margin-top:0px;}
+
+#format_html_advanced span{display:inline-block; width:64px;}
+</style>
+
+<script type="text/javascript" src="vendor/jquery-1.7.2_min.js"></script>
+<script type="text/javascript" src="options.js"></script>
+
+<!-- Le fav and touch icons -->
+<link rel="shortcut icon" href="img/favicon.ico">
+</head>
+
+<body>
+	<div class="container">
+
+		<!-- Main hero unit for a primary marketing message or call to action -->
+		<div class="hero-unit">
+			<img src="img/umbrella_128.png" style="float:left; margin:-20px 20px 0 0;">
+			<h1 style="font-size:24pt; margin-bottom:5px;">Copy All URLs <small>for Google Chrome</small></h1>
+			<p>Options panel</p>
+			<div><span class="badge badge-inverse" id="cpau_version_label">Version 2.0</span></div>
+		</div>
+		
+		<h2 class="storytitle first" style="float:left;">Settings</h2>
+		<a id="reset_settings" class="btn btn-danger" style="position:relative; top:4px; margin-left:10px;">Reset settings</a>
+		<div class="well" style="clear:left;">
+			<h3>Format</h3>
+			<div id="formats">
+				<label class="radio"><input type="radio" name="format" id="format_text" value="text"> Text</label>
+				<label class="radio"><input type="radio" name="format" id="format_html" value="html"> HTML</label>
+				<label class="radio"><input type="radio" name="format" id="format_custom" value="custom"> Custom</label>
+			</div>
+			<div class="well" id="format_html_advanced" style="display:none;">
+				<h4 style="margin-bottom:5px;">Anchor</h4>
+				<label class="radio">
+					<input type="radio" name="format_html_anchor" id="format_html_anchor_url" value="url">
+					<span>Page <b>URL</b></span>
+					, ex: <code>&lt;a href=&quot;http://www.google.com&quot;&gt;http://www.google.com&lt;/a&gt;</code>
+				</label>
+				<label class="radio">
+					<input type="radio" name="format_html_anchor" id="format_html_anchor_title" value="title">
+					<span>Page <b>title</b></span>
+					, ex: <code>&lt;a href=&quot;http://www.google.com&quot;&gt;Google&lt;/a&gt;</code>
+				</label>
+			</div>
+			<div class="well" id="format_custom_advanced" style="display:none;">
+				<h4 style="margin-bottom:5px;">Custom format</h4>
+				<p>Set your own row format by writing the template in this textarea.<br>
+				Use <code>$title</code> and <code>$url</code> variables.<br>
+				Don't forget to add a new line at the end, instead you'll get all copied data into a single line !</p>
+				<textarea style="width:500px; height:100px;"></textarea>
+			</div>
+		</div>
+		
+		<h2 class="storytitle">How to use ?</h2>
+		<div class="well">
+			Simply click the umbrella icon, and choose <b>Copy</b> or <b>Paste</b> !
+		</div>
+		
+		<h2 class="storytitle">About</h2>
+		<div class="well">
+			<p>If you have any suggestion about this plugin, you can mail me at <a class="btn btn-info" style="margin-top:-5px;" href="mailto:chrome@finalclap.com"><i class="icon-envelope icon-white"></i> chrome@finalclap.com</a>
+			<div>You can also visit my website : <a href="http://www.finalclap.com/">www.finalclap.com</a>.<br/>
+			It's about <b>After Effects</b> (Motion graphics), <b>Photoshop</b>, <b>3D Studio Max</b>, <b>Wordpress</b>, <b>jQuery</b></b> and other cool stuff, baby !</div>
+		</div>
+		
+		<h2 class="storytitle" style="font-size:22px;">FAQ</h2>
+		<div style="padding-left:3px;">
+			<h6>Can CopyAllURLs copy tab history ?</h6>
+			<p>Unfortunatly, since people at Google Chrome &amp; Chromium projects don't want to give access to tab history via Chrome API, it is not possible to do this -_-'.</p>
+			<p>You can read this topic for more information : <a href="http://code.google.com/p/chromium/issues/detail?id=41321">http://code.google.com/p/chromium/issues/detail?id=41321</a>.</p>
+			<br>
+			
+			<h6>Why the hell the icon is an umbrella ?</h6>
+			<p>I don't really know, I was hanging around at <a href="http://iconspedia.com/">iconspedia.com</a> and I found this umbrella icon.<br>
+			It was looking good so I used it for CopyAllURLs chrome extension !</p>
+		</div>
+		<hr>
+
+		<footer>
+			<p>&copy; 2012 <a href="http://www.finalclap.com/">www.finalclap.com</a></p>
+		</footer>
+
+	</div><!-- /container -->
+</body>
+</html>

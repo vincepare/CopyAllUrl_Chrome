@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="popup.css">
+<script type="text/javascript" src="vendor/jquery-1.7.2_min.js"></script>
+<script type="text/javascript" src="vendor/encoder.js"></script>
+<script type="text/javascript" src="popup.js"></script>
+</head>
+<body>
+	<ul>
+		<li id="actionCopy">
+			<div class="menu" style="background-image: url(img/copy.png);">
+				<span class="text">Copy</span>
+			</div>
+		</li>
+		<li id="actionPaste">
+			<div class="menu" style="background-image: url(img/paste.png);">
+				<span class="text">Paste</span>
+			</div>
+		</li>
+		<div class="separator"></div>
+		<li id="actionOption" style="display: block; ">
+			<div id="optionItem" class="menu">Options</div>
+		</li>
+	</ul>
+	<textarea id="clipboardBuffer"></textarea>
+	<div id="message"></div>
+</body>
+</html>
