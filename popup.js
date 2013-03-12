@@ -53,7 +53,13 @@ Action = {
 	paste: function(){
 		// alert( bkg.Clipboard.read() );
 		var clipboardString = bkg.Clipboard.read();
-		var urlList = clipboardString.split("\n");
+		
+		// Extraction des URL, soit ligne par ligne, soit intelligent paste
+		if( localStorage["intelligent_paste"] == "true" ){
+			var urlList = clipboardString.match(/(https?|ftp|ssh|mailto):\/\/[a-z0-9\/:%_+.,#?&=-]+/gi);
+		} else {
+			var urlList = clipboardString.split("\n");
+		}
 		
 		// Extraction de l'URL pour les lignes au format HTML (<a...>#url</a>)
 		$.each(urlList, function(key, val){

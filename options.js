@@ -26,6 +26,12 @@ jQuery(document).ready(function($){
 		OptionFormManager.init();
 	});
 	
+	// Intelligent paste
+	$('#intelligent_paste').change(function(e){
+		localStorage["intelligent_paste"] = $(this).prop("checked");
+		OptionFormManager.init();
+	});
+	
 	// Reset
 	$('#reset_settings').click(function(e){
 		OptionFormManager.optionsReset();
@@ -55,6 +61,7 @@ var OptionFormManager = {
 		var format = localStorage['format'] ? localStorage['format'] : 'text';
 		var anchor = localStorage['anchor'] ? localStorage['anchor'] : 'url';
 		var format_custom_advanced = localStorage['format_custom_advanced'] ? localStorage['format_custom_advanced'] : '';
+		var intelligent_paste = localStorage['intelligent_paste'] == "true" ? true : false;
 		
 		// Coche Format
 		this.cocherFormat(format);
@@ -75,6 +82,9 @@ var OptionFormManager = {
 		if( format == 'custom' ){
 			$('#format_custom_advanced').show();
 		}
+		
+		// Coche Intelligent paste
+		jQuery('#intelligent_paste').prop('checked', intelligent_paste);
 	},
 	
 	/**
@@ -92,6 +102,7 @@ var OptionFormManager = {
 		delete(localStorage["format"]);
 		delete(localStorage["anchor"]);
 		delete(localStorage["format_custom_advanced"]);
+		delete(localStorage["intelligent_paste"]);
 		this.init();
 	}
 }

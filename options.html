@@ -26,6 +26,11 @@ body{background:#F0F0F0;}
 .storytitle.first{font-size:26px; margin-bottom:5px; margin-top:0px;}
 
 #format_html_advanced span{display:inline-block; width:64px;}
+
+.settings h3{margin-top:30px;}
+.settings h3:first-child{margin-top:0;}
+
+.help {color:grey; font-size:9pt; font-style:italic; margin:-5px 0 0 18px;}
 </style>
 
 <script type="text/javascript" src="vendor/jquery-1.7.2_min.js"></script>
@@ -48,7 +53,7 @@ body{background:#F0F0F0;}
 		
 		<h2 class="storytitle first" style="float:left;">Settings</h2>
 		<a id="reset_settings" class="btn btn-danger" style="position:relative; top:4px; margin-left:10px;">Reset settings</a>
-		<div class="well" style="clear:left;">
+		<div class="well settings" style="clear:left;">
 			<h3>Format</h3>
 			<div id="formats">
 				<label class="radio"><input type="radio" name="format" id="format_text" value="text"> Text</label>
@@ -75,6 +80,10 @@ body{background:#F0F0F0;}
 				Don't forget to add a new line at the end, instead you'll get all copied data into a single line !</p>
 				<textarea style="width:500px; height:100px;"></textarea>
 			</div>
+			
+			<h3>Miscellaneous</h3>
+			<label class="checkbox"><input type="checkbox" name="intelligent_paste" id="intelligent_paste" value="on"> Intelligent paste</label>
+			<div class="help">Extract URLs from raw text when using paste feature (instead of processing pasted text line by line, with 1 line = 1 url)</div>
 		</div>
 		
 		<h2 class="storytitle">How to use ?</h2>
