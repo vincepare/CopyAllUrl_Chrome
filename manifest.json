@@ -4,7 +4,7 @@
       "default_title": "Copy URLs to clipboard",
 	  "default_popup": "popup.html"
    },
-   "description": "Copy all openned tabs URL to clipboard (Text or HTML formats available, see Options).",
+   "description": "Copy tabs URL to clipboard (formats : text, HTML, JSON or custom). Paste to open multiple URL at one go.",
    "icons": {
       "128": "img/umbrella_128.png"
    },
@@ -14,6 +14,6 @@
    "name": "Copy All Urls",
    "options_page": "options.html",
    "permissions": [ "tabs", "http://*/*", "https://*/*", "management", "clipboardRead", "clipboardWrite" ],
-   "version": "2.4",
+   "version": "2.5",
    "manifest_version": 2
 }

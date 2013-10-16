@@ -1,8 +1,8 @@
 bkg = chrome.extension.getBackgroundPage(); // Récupération d'une référence vers la backgroundpage
 
 /**
- * Fonction principale, exécutée lors du clic sur l'icône CopyAllURLs
-**/
+* Fonction principale, exécutée lors du clic sur l'icône CopyAllURLs
+*/
 jQuery(function($){
 	// Bindings actions
 	$('#actionCopy').click(function(e){
@@ -17,12 +17,12 @@ jQuery(function($){
 });
 
 /**
- * Objet qui gère les actions (clic sur liens de fonctionnalités dans popup.html)
-**/
+* Objet qui gère les actions (clic sur liens de fonctionnalités dans popup.html)
+*/
 Action = {
 	/**
-	 * Copie les URLs dans le presse papier
-	**/
+	* Copie les URLs dans le presse papier
+	*/
 	copy: function(){
 		// On récupère le format (par défaut : text)
 		format = localStorage['format'] ? localStorage['format'] : 'text';
@@ -36,6 +36,8 @@ Action = {
 					outputText = CopyTo.html(tabs);
 				} else if( format == 'custom' ) {
 					outputText = CopyTo.custom(tabs);
+				} else if( format == 'json' ) {
+					outputText = CopyTo.json(tabs);
 				} else {
 					outputText = CopyTo.text(tabs);
 				}
@@ -48,8 +50,8 @@ Action = {
 	},
 	
 	/**
-	 * Ouvre toutes les URLs du presse papier dans des nouveaux onglets
-	**/
+	* Ouvre toutes les URLs du presse papier dans des nouveaux onglets
+	*/
 	paste: function(){
 		// alert( bkg.Clipboard.read() );
 		var clipboardString = bkg.Clipboard.read();
@@ -83,20 +85,21 @@ Action = {
 		});
 		
 		// Ouverture de toutes les URLs dans des onglets
+		bkg.debug_paste = {list: urlList, openned: []};
 		$.each(urlList, function(key, val){
-			chrome.tabs.create({ url: val});
+			chrome.tabs.create({ url: val}, function(tab){
+				bkg.debug_paste.openned.push(tab.url);
+			});
 		});
-		
-		// console.log(urlList);
 	}
 }
 
 /**
- * Fonctions de copie des URL dans une chaîne de caractères
-**/
+* Fonctions de copie des URL dans une chaîne de caractères
+*/
 CopyTo = {
 	// Copie les URLs des onglets au format html
-	html: function html(tabs){
+	html: function(tabs){
 		var anchor = localStorage['anchor'] ? localStorage['anchor'] : 'url';
 		var row_anchor = '';
 		var s = '';
@@ -118,7 +121,10 @@ CopyTo = {
 	
 	// Copie les URLs des onglets au format custom
 	custom: function(tabs){
-		var template = (localStorage['format_custom_advanced'] && localStorage['format_custom_advanced'] != '') ? localStorage['format_custom_advanced'] : 'ERROR : Row template is empty ! (see options page)';
+		var template = (localStorage['format_custom_advanced'] && localStorage['format_custom_advanced'] != '') ? localStorage['format_custom_advanced'] : null;
+		if( template == null ){
+			return 'ERROR : Row template is empty ! (see options page)';
+		}
 		var s = '';
 		for (var i=0; i < tabs.length; i++) {
 			var current_row   = template;
@@ -141,12 +147,21 @@ CopyTo = {
 	},
 	
 	// Copie les URLs des onglets au format texte
-	text: function text(tabs){
+	text: function(tabs){
 		var s = '';
 		for (var i=0; i < tabs.length; i++) {
 			s += tabs[i].url;
 			s = s + "\n";
 		}
 		return s;
+	},
+	
+	// Copie les URLs des onglets au format JSON
+	json: function(tabs){
+		var data = [];
+		for (var i=0; i < tabs.length; i++) {
+			data.push({url: tabs[i].url, title: tabs[i].title});
+		}
+		return JSON.stringify(data);
 	}
 }

@@ -1,17 +1,17 @@
 /**
- * Gére l'accès au presse papier
- * (on est obligé de passer par la background page pour y accéder, cf: http://stackoverflow.com/questions/6925073/copy-paste-not-working-in-chrome-extension)
-**/
+* Gére l'accès au presse papier
+* (on est obligé de passer par la background page pour y accéder, cf: http://stackoverflow.com/questions/6925073/copy-paste-not-working-in-chrome-extension)
+*/
 Clipboard = {
 	/**
-	 * Ecrit la chaîne passée en paramètre dans le presse papier (fonction "Copier")
-	 *
-	 * On a pas accès au presse papier via l'API Google Chrome,
-	 * donc l'astuce consiste à placer le texte à copier dans un <textarea>,
-	 * de sélectionner tout le contenu de ce <textarea>, et de copier.
-	 *
-	 * @param String str Chaîne à copier dans le presse-papier
-	**/
+	* Ecrit la chaîne passée en paramètre dans le presse papier (fonction "Copier")
+	*
+	* On a pas accès au presse papier via l'API Google Chrome,
+	* donc l'astuce consiste à placer le texte à copier dans un <textarea>,
+	* de sélectionner tout le contenu de ce <textarea>, et de copier.
+	*
+	* @param String str Chaîne à copier dans le presse-papier
+	*/
 	write: function(str){
 		// console.log('write');
 		
@@ -25,8 +25,8 @@ Clipboard = {
 	},
 	
 	/**
-	 * Retourne le contenu du presse papier (String)
-	**/
+	* Retourne le contenu du presse papier (String)
+	*/
 	read: function(){
 		// console.log('read');
 		

@@ -1,3 +1,5 @@
+bkg = chrome.extension.getBackgroundPage(); // Récupération d'une référence vers la backgroundpage
+
 jQuery(document).ready(function($){
 	// Affichage version
 	chrome.management.get(getChromeExtensionKey(), function(data){
@@ -36,11 +38,25 @@ jQuery(document).ready(function($){
 	$('#reset_settings').click(function(e){
 		OptionFormManager.optionsReset();
 	});
+	
+	// Copyright
+	var currentYear = new Date().getFullYear();
+	if( $('#copyright-year-footer').text() < currentYear ){
+		$('#copyright-year-footer').text(currentYear);
+	}
+	
+	// Debug (monitoring)
+	setInterval(function(){
+		try{
+			$('#debug-paste-meter-url').text(bkg.debug_paste.list.length);
+			$('#debug-paste-meter-tab').text(bkg.debug_paste.openned.length);
+		} catch(ex) {}
+	}, 100);
 });
 
 /**
- * Fonction qui récupère la clé de l'extension, pour récupérer des infos dessus (comme sa version)
-**/
+* Fonction qui récupère la clé de l'extension, pour récupérer des infos dessus (comme sa version)
+*/
 function getChromeExtensionKey(){
 	var url = chrome.extension.getURL('stop');
 	var matches = chrome.extension.getURL('stop').match(new RegExp("[a-z0-9_-]+://([a-z0-9_-]+)/stop","i"));
@@ -51,12 +67,12 @@ function getChromeExtensionKey(){
 }
 
 /**
- * Objet de gestion du formulaire d'options
-**/
+* Objet de gestion du formulaire d'options
+*/
 var OptionFormManager = {
 	/**
-	 * Init form from localStorage (saved settings)
-	**/
+	* Init form from localStorage (saved settings)
+	*/
 	init: function(){
 		var format = localStorage['format'] ? localStorage['format'] : 'text';
 		var anchor = localStorage['anchor'] ? localStorage['anchor'] : 'url';
@@ -88,16 +104,16 @@ var OptionFormManager = {
 	},
 	
 	/**
-	 * Checks the Text or HTML checkbox
-	**/
+	* Checks the Text or HTML checkbox
+	*/
 	cocherFormat: function(option){
 		jQuery('#formats input[type=radio]').attr('checked', false);
 		jQuery('#format_' + option).attr('checked', true);
 	},
 
 	/**
-	 * Delete options
-	**/
+	* Delete options
+	*/
 	optionsReset: function(){
 		delete(localStorage["format"]);
 		delete(localStorage["anchor"]);
