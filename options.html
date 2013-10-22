@@ -85,7 +85,7 @@ body{background:#F0F0F0;}
 			
 			<h3>Miscellaneous</h3>
 			<label class="checkbox"><input type="checkbox" name="intelligent_paste" id="intelligent_paste" value="on"> Intelligent paste</label>
-			<div class="help">Extract URLs from raw text when using paste feature (instead of processing pasted text line by line, with 1 line = 1 url)</div>
+			<div class="help">Extract URLs from raw text when using paste feature (instead of processing pasted text line by line, with 1 line = 1 url). The only pitfall using this feature is that it doesn't get &quot;special urls&quot; like ones beginning with <code>file:///</code> or <code>chrome://</code>...</div>
 		</div>
 		
 		<h2 class="storytitle">How to use ?</h2>
@@ -98,16 +98,6 @@ body{background:#F0F0F0;}
 			<p>If you have any suggestion about this plugin, you can mail me at <a class="btn btn-info" style="margin-top:-5px;" href="mailto:chrome@finalclap.com"><i class="icon-envelope icon-white"></i> chrome@finalclap.com</a></p>
 			<div>You can also visit my website : <a href="http://www.finalclap.com/">www.finalclap.com</a>.<br/>
 			It's about <b>After Effects</b> (Motion graphics), <b>Photoshop</b>, <b>3D Studio Max</b>, <b>Wordpress</b>, <b>jQuery</b></b> and other cool stuff, baby !</div>
-		</div>
-		
-		<h2 class="storytitle">Debug</h2>
-		<div class="well">
-			<p>2013-10-16<br>
-			Some people reported me a bug on the paste feature, where you get less openned URL (tabs) than the clipboard does contains.</p>
-			<p>I think this bug is due to Chrome API, not this extension. So I added a little monitoring function that shows how many URL where found in the clipboard, and how many URLs where actually opened, when you use the paste function.</p>
-			<p>If everything works, you should get the same value for both variables, but if the values are different, this means that there is a bug on Chrome API's <code>chrome.tabs.create</code>.</p>
-			<p><strong>Last time you used Paste :</strong><br><code id="debug-paste-meter-url">--</code> URL where found in the clipboard<br><code id="debug-paste-meter-tab">--</code> tabs where actually opened</p>
-			<p>Feel free to send me (by email) this information, and your clipboard content, to help to fix this bug.</p>
 		</div>
 		
 		<h2 class="storytitle" style="font-size:22px;">FAQ</h2>

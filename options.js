@@ -44,14 +44,6 @@ jQuery(document).ready(function($){
 	if( $('#copyright-year-footer').text() < currentYear ){
 		$('#copyright-year-footer').text(currentYear);
 	}
-	
-	// Debug (monitoring)
-	setInterval(function(){
-		try{
-			$('#debug-paste-meter-url').text(bkg.debug_paste.list.length);
-			$('#debug-paste-meter-tab').text(bkg.debug_paste.openned.length);
-		} catch(ex) {}
-	}, 100);
 });
 
 /**
