@@ -37,33 +37,30 @@ Clipboard = {
 */
 Action = {
 	/**
-	* Copie les URLs dans le presse papier
+	* Copie les URLs de la fenêtre passé en paramètre dans le presse papier
 	*/
-	copy: function(){
+	copy: function(win){
 		// On récupère le format (par défaut : text)
 		format = localStorage['format'] ? localStorage['format'] : 'text';
 		outputText = '';
 		
-		// On récupére la fenêtre courrante
-		chrome.windows.getCurrent(function(win) {
-			// On récupère tous les onglets de la fenêtre courante
-			chrome.tabs.getAllInWindow(win.id, function(tabs) {
-				if( format == 'html' ){
-					outputText = CopyTo.html(tabs);
-				} else if( format == 'custom' ) {
-					outputText = CopyTo.custom(tabs);
-				} else if( format == 'json' ) {
-					outputText = CopyTo.json(tabs);
-				} else {
-					outputText = CopyTo.text(tabs);
-				}
-				
-				// Copie la liste d'URL dans le presse papier
-				Clipboard.write(outputText);
-				
-				// Indique à la popup le nombre d'URL copiées, pour affichage dans la popup
-				chrome.runtime.sendMessage({copied_url: tabs.length});
-			})
+		// On récupère tous les onglets de la fenêtre courante
+		chrome.tabs.getAllInWindow(win.id, function(tabs){
+			if( format == 'html' ){
+				outputText = CopyTo.html(tabs);
+			} else if( format == 'custom' ) {
+				outputText = CopyTo.custom(tabs);
+			} else if( format == 'json' ) {
+				outputText = CopyTo.json(tabs);
+			} else {
+				outputText = CopyTo.text(tabs);
+			}
+			
+			// Copie la liste d'URL dans le presse papier
+			Clipboard.write(outputText);
+			
+			// Indique à la popup le nombre d'URL copiées, pour affichage dans la popup
+			chrome.runtime.sendMessage({copied_url: tabs.length});
 		});
 	},
 	
