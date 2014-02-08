@@ -30,7 +30,10 @@ body{background:#F0F0F0;}
 .settings h3{margin-top:30px;}
 .settings h3:first-child{margin-top:0;}
 
-.help {color:grey; font-size:9pt; margin:-5px 0 0 18px;}
+#misc>div {margin-top:10px;}
+#misc .help {color:grey; font-size:9pt; margin:-5px 0 0 18px;}
+#misc>div.select {margin-top:16px;}
+#misc>div.select label {display:inline-block; position:relative; top:-3px; margin:0 0 0 18px;}
 </style>
 
 <script type="text/javascript" src="vendor/jquery-1.7.2_min.js"></script>
@@ -84,13 +87,33 @@ body{background:#F0F0F0;}
 			</div>
 			
 			<h3>Miscellaneous</h3>
-			<label class="checkbox"><input type="checkbox" name="intelligent_paste" id="intelligent_paste" value="on"> Intelligent paste</label>
-			<div class="help">Extract URLs from raw text when using paste feature (instead of processing pasted text line by line, with 1 line = 1 url). The only pitfall using this feature is that it doesn't get &quot;special urls&quot; like ones beginning with <code>file:///</code> or <code>chrome://</code>...</div>
+			<div id="misc">
+				<div>
+					<label class="checkbox"><input type="checkbox" name="intelligent_paste" id="intelligent_paste" value="on"> Intelligent paste</label>
+					<div class="help">Extract URLs from raw text when using paste feature (instead of processing pasted text line by line, with 1 line = 1 url). The only pitfall using this feature is that it doesn't get &quot;special urls&quot; like ones beginning with <code>file:///</code> or <code>chrome://</code>...</div>
+				</div>
+				<div>
+					<label class="checkbox"><input type="checkbox" name="highlighted_tab_only" id="highlighted_tab_only" value="on"> 
+					Copy highlighted tabs only</label>
+					<div class="help">Copy only selected tabs (you can select multiple tabs by holding the <kbd>Ctrl</kbd> key when clicking a tab).</div>
+				</div>
+				<div class="select">
+					<label>Default action : </label>
+					<select name="default_action" id="default_action">
+						<option value="menu">Le me choose (show menu)</option>
+						<option value="copy">Copy</option>
+						<option value="paste">Paste</option>
+					</select>
+					<div class="help">Choose what to do when clicking the umbrella icon. Specially designed for lazy people who use only one feature (copy or paste) and want to fire this feature directly with one click, without showing the drop down menu...</div>
+				</div>
+			</div>
 		</div>
 		
 		<h2 class="storytitle">How to use ?</h2>
 		<div class="well">
-			Simply click the umbrella icon, and choose <b>Copy</b> or <b>Paste</b> !
+			Simply click the umbrella icon, and choose <b>Copy</b> or <b>Paste</b> !<br>
+			<br>
+			You can also define keyboard shorcut for copy and paste feature on chrome extensions page (chrome://extensions/).
 		</div>
 		
 		<h2 class="storytitle">About</h2>
@@ -114,7 +137,7 @@ body{background:#F0F0F0;}
 		<hr>
 
 		<footer>
-			<p>&copy; <span id="copyright-year-footer">2013</span> <a href="http://www.finalclap.com/">www.finalclap.com</a> - Vincent Paré - Made in France</p>
+			<p>&copy; <span id="copyright-year-footer">2014</span> <a href="http://www.finalclap.com/">www.finalclap.com</a> - Vincent Paré - Made in France</p>
 		</footer>
 
 	</div><!-- /container -->

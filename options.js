@@ -34,6 +34,18 @@ jQuery(document).ready(function($){
 		OptionFormManager.init();
 	});
 	
+	// Highlighted only
+	$('#highlighted_tab_only').change(function(e){
+		localStorage["highlighted_tab_only"] = $(this).prop("checked");
+		OptionFormManager.init();
+	});
+	
+	// Default action
+	$('#default_action').change(function(e){
+		localStorage["default_action"] = $(this).val();
+		OptionFormManager.init();
+	});
+	
 	// Reset
 	$('#reset_settings').click(function(e){
 		OptionFormManager.optionsReset();
@@ -70,6 +82,8 @@ var OptionFormManager = {
 		var anchor = localStorage['anchor'] ? localStorage['anchor'] : 'url';
 		var format_custom_advanced = localStorage['format_custom_advanced'] ? localStorage['format_custom_advanced'] : '';
 		var intelligent_paste = localStorage['intelligent_paste'] == "true" ? true : false;
+		var highlighted_tab_only = localStorage['highlighted_tab_only'] == "true" ? true : false;
+		var default_action = localStorage['default_action'] ? localStorage['default_action'] : "menu";
 		
 		// Coche Format
 		this.cocherFormat(format);
@@ -93,6 +107,12 @@ var OptionFormManager = {
 		
 		// Coche Intelligent paste
 		jQuery('#intelligent_paste').prop('checked', intelligent_paste);
+		
+		// Coche highlighted
+		jQuery('#highlighted_tab_only').prop('checked', highlighted_tab_only);
+		
+		// Default action
+		jQuery('#default_action').val(default_action);
 	},
 	
 	/**
@@ -111,6 +131,8 @@ var OptionFormManager = {
 		delete(localStorage["anchor"]);
 		delete(localStorage["format_custom_advanced"]);
 		delete(localStorage["intelligent_paste"]);
+		delete(localStorage["highlighted_tab_only"]);
+		delete(localStorage["default_action"]);
 		this.init();
 	}
 }

@@ -42,10 +42,20 @@ Action = {
 	copy: function(win){
 		// On récupère le format (par défaut : text)
 		format = localStorage['format'] ? localStorage['format'] : 'text';
+		highlighted_tab_only = localStorage['highlighted_tab_only'] == "true" ? true : false;
 		outputText = '';
 		
-		// On récupère tous les onglets de la fenêtre courante
+		// On récupère tous les onglets de la fenêtre win
 		chrome.tabs.getAllInWindow(win.id, function(tabs){
+			// Filtrage des onglets
+			var tabs_filtered = [];
+			for (var i=0; i < tabs.length; i++) {
+				if( highlighted_tab_only && !tabs[i].highlighted ) continue;
+				tabs_filtered.push(tabs[i]);
+			}
+			tabs = tabs_filtered;
+			
+			// Génération des données copiées
 			if( format == 'html' ){
 				outputText = CopyTo.html(tabs);
 			} else if( format == 'custom' ) {
@@ -173,6 +183,22 @@ CopyTo = {
 		return JSON.stringify(data);
 	}
 }
+
+/**
+* Raccourci clavier
+*/
+chrome.commands.onCommand.addListener(function(command){
+	switch(command){
+		case "copy":
+			chrome.windows.getCurrent(function(win){
+				Action.copy(win);
+			});
+			break;
+		case "paste":
+			Action.paste();
+			break;
+	}
+});
 
 jQuery(function($){
 	// Au chargement de la page, on créé une textarea qui va servir à lire et à écrire dans le presse papier
