@@ -34,6 +34,8 @@ body{background:#F0F0F0;}
 #misc .help {color:grey; font-size:9pt; margin:-5px 0 0 18px;}
 #misc>div.select {margin-top:16px;}
 #misc>div.select label {display:inline-block; position:relative; top:-3px; margin:0 0 0 18px;}
+
+.paypal-donate form {margin:0;}
 </style>
 
 <script type="text/javascript" src="vendor/jquery-1.7.2_min.js"></script>
@@ -47,11 +49,21 @@ body{background:#F0F0F0;}
 	<div class="container">
 
 		<!-- Main hero unit for a primary marketing message or call to action -->
-		<div class="hero-unit">
+		<div class="hero-unit" style="position:relative;">
 			<img src="img/umbrella_128.png" style="float:left; margin:-20px 20px 0 0;">
 			<h1 style="font-size:24pt; margin-bottom:5px;">Copy All URLs <small>for Google Chrome</small></h1>
 			<p>Options panel</p>
 			<div><span class="badge badge-inverse" id="cpau_version_label">Version 2.0</span></div>
+			
+			<div class="paypal-donate" style="position:absolute; bottom:53px; left:469px;">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+				">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</div>
 		</div>
 		
 		<h2 class="storytitle first" style="float:left;">Settings</h2>
@@ -100,11 +112,19 @@ body{background:#F0F0F0;}
 				<div class="select">
 					<label>Default action : </label>
 					<select name="default_action" id="default_action">
-						<option value="menu">Le me choose (show menu)</option>
+						<option value="menu">Let me choose (show menu)</option>
 						<option value="copy">Copy</option>
 						<option value="paste">Paste</option>
 					</select>
 					<div class="help">Choose what to do when clicking the umbrella icon. Specially designed for lazy people who use only one feature (copy or paste) and want to fire this feature directly with one click, without showing the drop down menu...</div>
+				</div>
+				<div class="select">
+					<label>MIME type (copy) : </label>
+					<select name="mime" id="mime">
+						<option value="plaintext">Plain text</option>
+						<option value="html">HTML</option>
+					</select>
+					<div class="help">Use HTML MIME type to copy data as HTML rather than plain text, allowing to embed url into clickable links when pasting on word or an email client. This only affects HTML and Custom formats.</div>
 				</div>
 			</div>
 		</div>
@@ -118,9 +138,20 @@ body{background:#F0F0F0;}
 		
 		<h2 class="storytitle">About</h2>
 		<div class="well">
-			<p>If you have any suggestion about this plugin, you can mail me at <a class="btn btn-info" style="margin-top:-5px;" href="mailto:chrome@finalclap.com"><i class="icon-envelope icon-white"></i> chrome@finalclap.com</a></p>
+			<p>If you have any suggestion about this plugin, you can mail me at <a id="contact-link" class="btn btn-info" style="margin-top:-5px;" href="mailto:sp@mb.ot"><i class="icon-envelope icon-white"></i> <span>{loading}</span></a></p>
 			<div>You can also visit my website : <a href="http://www.finalclap.com/">www.finalclap.com</a>.<br/>
 			It's about <b>After Effects</b> (Motion graphics), <b>Photoshop</b>, <b>3D Studio Max</b>, <b>Wordpress</b>, <b>jQuery</b></b> and other cool stuff, baby !</div>
+			
+			<div class="paypal-donate" style="margin-top:14px;">
+				<p>If you like this extension and want to support its developement and maintenance, you can give some money via PayPal  ^^ :</p>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----MIIHTwYJKoZIhvcNAQcEoIIHQDCCBzwCAQExggEwMIIBLAIBADCBlDCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20CAQAwDQYJKoZIhvcNAQEBBQAEgYAWaUQrDKaOdzNxEJMUjSfFhZVxErYga8m0tsZMzwPOHwlTSJNafHMy6UB6XjTbxf1jQPsjfc+0HtEUhENXefNMn5wWgKkIzVthdPcrvZEQMMA1qWB/YDVxnDDW0b1NdfC7z5dSla52jX+ofvHgOt8hzCbr8/ZmngNvaeP5fQpLGjELMAkGBSsOAwIaBQAwgcwGCSqGSIb3DQEHATAUBggqhkiG9w0DBwQIdDaN5So1XgCAgajEY1HoJ+cHIqf+FNxp3RmbYJmbIqYs8mmSe1e+DIcGEFHOmMhsQZNNksxL4J9RuJzJbp5cP4NydZuMMdrhlGqgLE/LB6VK5i/cNTsJrstwyHriaTaaciBaoqu9evVuGibgusoJVJkMpghTdlZM8XfBJ0Cp1vDKQzu7rF5Q2+U6rqEmoO3C0P4RaP8zixQquJIJZQN7/Y+LfzSn6DLRrlOUgocy2n0ZV6qgggOHMIIDgzCCAuygAwIBAgIBADANBgkqhkiG9w0BAQUFADCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wHhcNMDQwMjEzMTAxMzE1WhcNMzUwMjEzMTAxMzE1WjCBjjELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNBMRYwFAYDVQQHEw1Nb3VudGFpbiBWaWV3MRQwEgYDVQQKEwtQYXlQYWwgSW5jLjETMBEGA1UECxQKbGl2ZV9jZXJ0czERMA8GA1UEAxQIbGl2ZV9hcGkxHDAaBgkqhkiG9w0BCQEWDXJlQHBheXBhbC5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMFHTt38RMxLXJyO2SmS+Ndl72T7oKJ4u4uw+6awntALWh03PewmIJuzbALScsTS4sZoS1fKciBGoh11gIfHzylvkdNe/hJl66/RGqrj5rFb08sAABNTzDTiqqNpJeBsYs/c2aiGozptX2RlnBktH+SUNpAajW724Nv2Wvhif6sFAgMBAAGjge4wgeswHQYDVR0OBBYEFJaffLvGbxe9WT9S1wob7BDWZJRrMIG7BgNVHSMEgbMwgbCAFJaffLvGbxe9WT9S1wob7BDWZJRroYGUpIGRMIGOMQswCQYDVQQGEwJVUzELMAkGA1UECBMCQ0ExFjAUBgNVBAcTDU1vdW50YWluIFZpZXcxFDASBgNVBAoTC1BheVBhbCBJbmMuMRMwEQYDVQQLFApsaXZlX2NlcnRzMREwDwYDVQQDFAhsaXZlX2FwaTEcMBoGCSqGSIb3DQEJARYNcmVAcGF5cGFsLmNvbYIBADAMBgNVHRMEBTADAQH/MA0GCSqGSIb3DQEBBQUAA4GBAIFfOlaagFrl71+jq6OKidbWFSE+Q4FqROvdgIONth+8kSK//Y/4ihuE4Ymvzn5ceE3S/iBSQQMjyvb+s2TWbQYDwcp129OPIbD9epdr4tJOUNiSojw7BHwYRiPh58S1xGlFgHFXwrEBb3dgNbMUa+u4qectsMAXpVHnD9wIyfmHMYIBmjCCAZYCAQEwgZQwgY4xCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDQTEWMBQGA1UEBxMNTW91bnRhaW4gVmlldzEUMBIGA1UEChMLUGF5UGFsIEluYy4xEzARBgNVBAsUCmxpdmVfY2VydHMxETAPBgNVBAMUCGxpdmVfYXBpMRwwGgYJKoZIhvcNAQkBFg1yZUBwYXlwYWwuY29tAgEAMAkGBSsOAwIaBQCgXTAYBgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNDAyMTYwMDAyMzVaMCMGCSqGSIb3DQEJBDEWBBQ2BJApblI97eBKb9jGUIVoUevPeTANBgkqhkiG9w0BAQEFAASBgITIIeBoALRSrzZx6LnJmDgibVnHpfZvnNnoKY7esHQu5HE4tkkeROIzBeigG21a2wWXho/ZF0YB8jOSckD8sK+El8YyuJDgs8UxkbiFx1oSIgbFnVM/wbcChLP4QFPrG9j4FYFyzKI46pMDAVQ2xbt5NNIKsQIcornA7iRYTJAi-----END PKCS7-----
+				">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+				</form>
+			</div>
 		</div>
 		
 		<h2 class="storytitle" style="font-size:22px;">FAQ</h2>

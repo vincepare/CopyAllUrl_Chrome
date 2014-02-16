@@ -1,6 +1,25 @@
 bkg = chrome.extension.getBackgroundPage(); // Récupération d'une référence vers la backgroundpage
 
 jQuery(document).ready(function($){
+	// Définition du bouton email
+	var email = (function(){
+		coded = "49vVNJ@y36Ws4sWA.4VN"
+		key = "bP3Oc7k8xzM2dnm0oWZplqEw4SKf1UDBr6NeVCTAshItiLYyjQu5vXHJFRGag9"
+		shift = coded.length
+		output = ""
+		for (i = 0; i < coded.length; i++) {
+			if (key.indexOf(coded.charAt(i)) == -1) {
+				ltr = coded.charAt(i)
+				output += (ltr)
+			} else {
+				ltr = (key.indexOf(coded.charAt(i)) - shift + key.length) % key.length
+				output += (key.charAt(ltr))
+			}
+		}
+		return output;
+	})();
+	$('#contact-link').attr('href', 'mailto:'+email).find('span').html(email);
+	
 	// Affichage version
 	chrome.management.get(getChromeExtensionKey(), function(data){
 		var versionExtension = data.version || 'unknown';
@@ -46,6 +65,12 @@ jQuery(document).ready(function($){
 		OptionFormManager.init();
 	});
 	
+	// MIME type
+	$('#mime').change(function(e){
+		localStorage["mime"] = $(this).val();
+		OptionFormManager.init();
+	});
+	
 	// Reset
 	$('#reset_settings').click(function(e){
 		OptionFormManager.optionsReset();
@@ -84,6 +109,7 @@ var OptionFormManager = {
 		var intelligent_paste = localStorage['intelligent_paste'] == "true" ? true : false;
 		var highlighted_tab_only = localStorage['highlighted_tab_only'] == "true" ? true : false;
 		var default_action = localStorage['default_action'] ? localStorage['default_action'] : "menu";
+		var mime = localStorage['mime'] ? localStorage['mime'] : 'plaintext';
 		
 		// Coche Format
 		this.cocherFormat(format);
@@ -113,6 +139,9 @@ var OptionFormManager = {
 		
 		// Default action
 		jQuery('#default_action').val(default_action);
+		
+		// MIME type
+		jQuery('#mime').val(mime);
 	},
 	
 	/**
@@ -133,6 +162,7 @@ var OptionFormManager = {
 		delete(localStorage["intelligent_paste"]);
 		delete(localStorage["highlighted_tab_only"]);
 		delete(localStorage["default_action"]);
+		delete(localStorage["mime"]);
 		this.init();
 	}
 }

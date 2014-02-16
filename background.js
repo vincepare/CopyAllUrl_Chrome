@@ -11,14 +11,30 @@ Clipboard = {
 	* de sélectionner tout le contenu de ce <textarea>, et de copier.
 	*
 	* @param String str Chaîne à copier dans le presse-papier
+	* @param Bool extended_mime Indique si on doit copier le type MIME text/html en plus du texte brut
 	*/
-	write: function(str){
+	write: function(str, extended_mime){
 		if(str == '' || str == undefined){
 			str = '<empty>';
 		}
+		
+		// Copie par défaut, via le clipboardBuffer
 		clipboardBuffer.val(str);
 		clipboardBuffer.select();
+		
+		// Copie via l'API (clipboardData)
+		var oncopyBackup = document.oncopy;
+		document.oncopy = function(e){
+			// Si on n'utilise pas le type MIME html, on sort tout de suite pour laisser la main à la méthode par défaut : clipboardBuffer
+			if( typeof extended_mime == "undefined" || extended_mime != true ){
+				return;
+			}
+			e.preventDefault();
+			e.clipboardData.setData("text/html", str);
+			e.clipboardData.setData("text/plain", str);
+		};
 		document.execCommand('copy');
+		document.oncopy = oncopyBackup;
 	},
 	
 	/**
@@ -40,13 +56,14 @@ Action = {
 	* Copie les URLs de la fenêtre passé en paramètre dans le presse papier
 	*/
 	copy: function(win){
-		// On récupère le format (par défaut : text)
-		format = localStorage['format'] ? localStorage['format'] : 'text';
-		highlighted_tab_only = localStorage['highlighted_tab_only'] == "true" ? true : false;
-		outputText = '';
-		
 		// On récupère tous les onglets de la fenêtre win
 		chrome.tabs.getAllInWindow(win.id, function(tabs){
+			// Récupération configuration
+			var format = localStorage['format'] ? localStorage['format'] : 'text';
+			var highlighted_tab_only = localStorage['highlighted_tab_only'] == 'true' ? true : false;
+			var extended_mime = typeof localStorage['mime'] != 'undefined' && localStorage['mime'] == 'html' ? true : false;
+			var outputText = '';
+			
 			// Filtrage des onglets
 			var tabs_filtered = [];
 			for (var i=0; i < tabs.length; i++) {
@@ -62,12 +79,14 @@ Action = {
 				outputText = CopyTo.custom(tabs);
 			} else if( format == 'json' ) {
 				outputText = CopyTo.json(tabs);
+				extended_mime = false;
 			} else {
 				outputText = CopyTo.text(tabs);
+				extended_mime = false;
 			}
 			
 			// Copie la liste d'URL dans le presse papier
-			Clipboard.write(outputText);
+			Clipboard.write(outputText, extended_mime);
 			
 			// Indique à la popup le nombre d'URL copiées, pour affichage dans la popup
 			chrome.runtime.sendMessage({copied_url: tabs.length});
