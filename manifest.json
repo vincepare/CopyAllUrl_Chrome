@@ -27,7 +27,8 @@
 	},
 	"name": "Copy All Urls",
 	"options_page": "options.html",
-	"permissions": [ "tabs", "http://*/*", "https://*/*", "management", "clipboardRead", "clipboardWrite" ],
-	"version": "2.9",
+	"permissions": ["tabs", "http://*/*", "https://*/*", "management", "clipboardRead", "clipboardWrite", "notifications"],
+	"content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+	"version": "2.10",
 	"manifest_version": 2
 }

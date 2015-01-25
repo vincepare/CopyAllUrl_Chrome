@@ -1,7 +1,3 @@
-/*body{margin:0; padding:0; background:#F0F0F0; margin:10px 10px 8px;}*/
-#message{font:10pt Arial, Helvetica, sans-serif; color:#009966; width:170px; margin:5px 0 10px;}
-#clipboardBuffer{position:absolute; top:-9999px; left:-9999px; width:0; height:0;}
-
 body {
 	font-family: arial, Verdana;
 	font-size: 12px;
@@ -60,3 +56,31 @@ li:hover {
 #optionItem {
 	margin-left: 26px;
 }
+
+#contribute {
+	margin-bottom:4px;
+	text-align:right;
+	font:11px Arial;
+}
+#contribute a {
+	color:silver;
+}
+
+#recently-updated {
+	margin-bottom:5px;
+	padding:4px 5px 6px;
+	border-radius:3px;
+	background:#D9EDF7;
+	font:8pt verdana;
+	color:#3A87AD;
+}
+#recently-updated a {color:#DF0000;}
+
+#message {
+	width:170px;
+	margin:5px 0 7px;
+	font:10pt Arial, Helvetica, sans-serif;
+	color:#009966;
+}
+
+#message.error {color:#DF0000;}
