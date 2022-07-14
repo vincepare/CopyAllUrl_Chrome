@@ -165,7 +165,7 @@ var OptionFormManager = {
 		var format = localStorage['format'] ? localStorage['format'] : 'text';
 		var anchor = localStorage['anchor'] ? localStorage['anchor'] : 'url';
 		var format_custom_advanced = localStorage['format_custom_advanced'] ? localStorage['format_custom_advanced'] : '';
-		var intelligent_paste = localStorage['intelligent_paste'] == "true" ? true : false;
+		var intelligent_paste = localStorage['intelligent_paste'] ? (localStorage['intelligent_paste'] == "true" ? true : false) : true; // default to true
 		var walk_all_windows = localStorage['walk_all_windows'] == "true" ? true : false;
 		var highlighted_tab_only = localStorage['highlighted_tab_only'] == "true" ? true : false;
 		var default_action = localStorage['default_action'] ? localStorage['default_action'] : "menu";
