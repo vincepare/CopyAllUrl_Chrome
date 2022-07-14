@@ -116,14 +116,15 @@ Action = {
 		var clipboardString = Clipboard.read();
 		
 		// Extraction des URL, soit ligne par ligne, soit intelligent paste
-		if( localStorage["intelligent_paste"] == "true" ){
-			var urlList = clipboardString.match(/(https?|ftp|ssh|mailto):\/\/[a-z0-9\/:%_+.,#?!@&=-]+/gi);
+		if( typeof localStorage["intelligent_paste"] === 'undefined' || localStorage["intelligent_paste"] == "true" ){
+			// Extraction des URL intelligent (http/https/ftp/ssh/mailto) avec la possibilité d'ignorer les liens Markdown
+			var urlList = Array.from(clipboardString.matchAll(/(?:\[.*?\]\()?((?:https?|ftp|ssh|mailto):\/\/[a-z0-9\/:%_+.,#?!@&=-]+)/gi), match => match[1]);
 		} else {
 			var urlList = clipboardString.split("\n");
 		}
 		
 		// Si urlList est vide, on affiche un message d'erreur et on sort
-		if (urlList == null) {
+		if (urlList == null || urlList.length == 0) {
 			chrome.runtime.sendMessage({type: "paste", errorMsg: "No URL found in the clipboard"});
 			return;
 		}
@@ -145,6 +146,12 @@ Action = {
 			}
 			return true;
 		});
+
+		// Après le filtrage s'il n'y a plus d'URL valides, on affiche un message d'erreur et on sort
+		if (urlList.length == 0) {
+			chrome.runtime.sendMessage({type: "paste", errorMsg: "No URL found in the clipboard"});
+			return;
+		}
 		
 		// Ouverture de toutes les URLs dans des onglets
 		$.each(urlList, function(key, val){
@@ -346,7 +353,7 @@ AnalyticsHelper = {
 			da: localStorage['default_action'] ? localStorage['default_action'] : "menu",
 			mm: localStorage['mime'] ? localStorage['mime'] : 'plaintext',
 			hl: localStorage['highlighted_tab_only'] == "true" ? 1 : 0,
-			ip: localStorage['intelligent_paste'] == "true" ? 1 : 0,
+			ip: localStorage['intelligent_paste'] ? (localStorage['intelligent_paste'] == "true" ? 1 : 0) : 1, // default to 1
 			ww: localStorage['walk_all_windows'] == "true" ? 1 : 0
 		};
 		
@@ -367,7 +374,7 @@ AnalyticsHelper = {
 				break;
 			case "paste":
 				var shortSettings = {
-					ip: localStorage['intelligent_paste'] == "true" ? 1 : 0
+					ip: localStorage['intelligent_paste'] ? (localStorage['intelligent_paste'] == "true" ? 1 : 0) : 1 // default to 1
 				};
 				break;
 		}
